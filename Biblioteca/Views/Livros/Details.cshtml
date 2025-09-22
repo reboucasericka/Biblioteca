@@ -1,0 +1,33 @@
+﻿@model Biblioteca.Data.Entities.Livro
+
+@{
+    ViewData["Title"] = "Detalhes do Livro";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Título</dt>
+        <dd class="col-sm-10">@Model.Titulo</dd>
+
+        <dt class="col-sm-2">Autor</dt>
+        <dd class="col-sm-10">@Model.Autor</dd>
+
+        <dt class="col-sm-2">ISBN</dt>
+        <dd class="col-sm-10">@Model.ISBN</dd>
+
+        <dt class="col-sm-2">Ano</dt>
+        <dd class="col-sm-10">@Model.AnoPublicacao</dd>
+
+        <dt class="col-sm-2">Disponível</dt>
+        <dd class="col-sm-10">@((Model.IsAvailable) ? "Sim" : "Não")</dd>
+
+        <dt class="col-sm-2">Stock</dt>
+        <dd class="col-sm-10">@Model.Stock</dd>
+    </dl>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>
+

@@ -1,19 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using Biblioteca.Data;
+using Biblioteca.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Biblioteca.Data;
-using Biblioteca.Data.Entities;
+
 
 namespace Biblioteca.Controllers
 {
     public class LivrosController : Controller
     {
-        public IActionResult Index()
-        {
-            private readonly BibliotecaContext _context;
+        private readonly DataContext _context;
 
-        public LivrosController(BibliotecaContext context)
+        public LivrosController(DataContext context)
         {
             _context = context;
         }
@@ -50,8 +47,10 @@ namespace Biblioteca.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(livro);
+                _context.Livros.Add(livro);
                 await _context.SaveChangesAsync();
+
+                int v = await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(livro);
@@ -79,8 +78,9 @@ namespace Biblioteca.Controllers
             {
                 try
                 {
-                    _context.Update(livro);
+                    _context.Livros.Update(livro);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

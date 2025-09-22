@@ -11,10 +11,10 @@ namespace Biblioteca.Controllers
 {
     public class ReservasController : Controller
     {
-        private readonly BibliotecaContext _context;
+        private readonly DataContext _context;
         private readonly UserManager<Leitor> _userManager;
 
-        public ReservasController(BibliotecaContext context, UserManager<Leitor> userManager)
+        public ReservasController(DataContext context, UserManager<Leitor> userManager)
         {
             _context = context;
             _userManager = userManager;
