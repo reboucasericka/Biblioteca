@@ -1,3 +1,6 @@
+using Biblioteca.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Biblioteca
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Biblioteca
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
