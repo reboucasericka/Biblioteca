@@ -1,0 +1,46 @@
+@model IEnumerable<Biblioteca.Data.Entities.Reserva>
+
+@{
+    ViewData["Title"] = "Lista de Reservas";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nova Reserva</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Livro.Titulo)</th>
+            <th>@Html.DisplayNameFor(model => model.Leitor.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.DataReserva)</th>
+            <th>@Html.DisplayNameFor(model => model.DataExpiracao)</th>
+            <th>@Html.DisplayNameFor(model => model.Ativa)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Livro?.Titulo</td>
+                <td>@item.Leitor?.Nome</td>
+                <td>@item.DataReserva.ToString("dd/MM/yyyy")</td>
+                <td>@(item.DataExpiracao?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                <td>@(item.Ativa ? "Sim" : "Não")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalhes</a>
+                    @if (item.Ativa)
+                    {
+                        <form asp-action="Cancelar" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Tem certeza que deseja cancelar esta reserva?')">Cancelar</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

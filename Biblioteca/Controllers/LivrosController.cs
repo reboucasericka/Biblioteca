@@ -2,10 +2,12 @@
 using Biblioteca.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Biblioteca.Controllers
 {
+    [Authorize]
     public class LivrosController : Controller
     {
         private readonly DataContext _context;
@@ -49,8 +51,6 @@ namespace Biblioteca.Controllers
             {
                 _context.Livros.Add(livro);
                 await _context.SaveChangesAsync();
-
-                int v = await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(livro);

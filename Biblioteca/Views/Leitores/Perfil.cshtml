@@ -1,0 +1,42 @@
+@model Biblioteca.Data.Entities.Leitor
+
+@{
+    ViewData["Title"] = "Meu Perfil";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Perfil" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="FotoPerfilUrl" class="control-label"></label>
+                <input asp-for="FotoPerfilUrl" class="form-control" />
+                <span asp-validation-for="FotoPerfilUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Atualizar Perfil" class="btn btn-primary" />
+                <a asp-action="Logout" class="btn btn-danger">Logout</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

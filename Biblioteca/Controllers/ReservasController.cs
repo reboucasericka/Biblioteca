@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Biblioteca.Controllers
 {
+    [Authorize]
     public class ReservasController : Controller
     {
         private readonly DataContext _context;
@@ -48,7 +49,11 @@ namespace Biblioteca.Controllers
         // GET: Reservas/Create
         public IActionResult Create()
         {
-            ViewData["Livros"] = _context.Livros.Where(l => l.IsAvailable).ToList();
+            ViewBag.Livros = _context.Livros.Where(l => l.IsAvailable).Select(l => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value = l.Id.ToString(),
+                Text = $"{l.Titulo} - {l.Autor}"
+            }).ToList();
             return View();
         }
 
