@@ -2,47 +2,83 @@
 
 @{
     ViewData["Title"] = "Registrar";
+    Layout = null;
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group mb-3">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteca Digital</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>Crie sua conta!</h2>
+                <p>Junte-se à nossa biblioteca digital</p>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                
+                <div class="mb-3">
+                    <label asp-for="Nome" class="form-label">
+                        <i class="fas fa-user me-2"></i>Nome Completo
+                    </label>
+                    <input asp-for="Nome" class="form-control" placeholder="Seu nome completo" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">
+                        <i class="fas fa-envelope me-2"></i>Email
+                    </label>
+                    <input asp-for="Email" class="form-control" placeholder="seu@email.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">
+                        <i class="fas fa-lock me-2"></i>Senha
+                    </label>
+                    <input asp-for="Password" class="form-control" placeholder="Mínimo 6 caracteres" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <input type="submit" value="Registrar" class="btn btn-primary" />
-                <a asp-action="Login" class="btn btn-secondary">Já tem conta? Faça login</a>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label">
+                        <i class="fas fa-lock me-2"></i>Confirmar Senha
+                    </label>
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirme sua senha" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2 mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Criar Conta
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <p class="mb-0">Já tem uma conta? 
+                        <a asp-action="Login" class="text-decoration-none fw-bold">Faça login aqui</a>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</body>
+</html>

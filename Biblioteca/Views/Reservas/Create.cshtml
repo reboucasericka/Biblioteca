@@ -4,26 +4,38 @@
     ViewData["Title"] = "Nova Reserva";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group mb-3">
-                <label asp-for="LivroId" class="control-label">Livro</label>
-                <select asp-for="LivroId" class="form-control" asp-items="ViewBag.Livros">
-                    <option value="">Selecione um livro</option>
-                </select>
-                <span asp-validation-for="LivroId" class="text-danger"></span>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="mb-0"><i class="fas fa-bookmark me-2"></i>@ViewData["Title"]</h4>
             </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="LivroId" class="form-label">
+                            <i class="fas fa-book me-2"></i>Selecione o Livro
+                        </label>
+                        <select asp-for="LivroId" class="form-control" asp-items="ViewBag.Livros">
+                            <option value="">Escolha um livro disponível</option>
+                        </select>
+                        <span asp-validation-for="LivroId" class="text-danger"></span>
+                        <div class="form-text">Apenas livros disponíveis são exibidos na lista.</div>
+                    </div>
 
-            <div class="form-group mb-3">
-                <input type="submit" value="Criar Reserva" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-bookmark me-2"></i>Criar Reserva
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
